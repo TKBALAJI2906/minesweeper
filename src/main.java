@@ -32,10 +32,8 @@ public class main implements Runnable{
         File file=new File("data.txt");
         try{
         boolean createNewFile=file.createNewFile();
-        System.out.println(createNewFile);
         }catch(IOException e){
-           System.out.println(e);
-        }
+      }
         try{
         FileInputStream fis=new FileInputStream(file);
         InputStreamReader isr=new InputStreamReader(fis);
@@ -43,9 +41,7 @@ public class main implements Runnable{
         String line = null;
         while((line=br.readLine())!=null)
         {
-          System.out.println(line);
-          valx=Integer.parseInt(line.trim());
-          System.out.println(valx);
+           valx=Integer.parseInt(line.trim());
         }
         br.close();
         }catch(IOException ex){
@@ -60,16 +56,14 @@ public class main implements Runnable{
           bw.write(datum);
           bw.close();
         }
-        else System.out.println("not high score");
         }catch(IOException ex)
         {
-          ex.printStackTrace();
         }
         String Msg1 = null,Msg2=null;
         ImageIcon icon=new ImageIcon("src/minesweeper.png");
-        if(gui.victory==true){ 
+        if(gui.victory==true&&gui.points==200){ 
             Msg1=" Won";
-            Msg2="\tcongratulations friend, you won the game :)\n\tWinner! Winner! chicken Dinner";
+            Msg2="         congrats nanba, you won the game :)\n\tWinner! Winner! chicken Dinner";
         }
         else if(gui.defeat==true){
             Msg1=" Lost";
@@ -102,7 +96,6 @@ public class main implements Runnable{
         clip.start();
         }catch(UnsupportedAudioFileException | IOException | LineUnavailableException e)
         {
-            System.out.println(e);
         }
     }
 }

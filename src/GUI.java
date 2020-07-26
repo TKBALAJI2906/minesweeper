@@ -61,10 +61,10 @@ public class GUI extends JFrame{
                 mines[i][j]=0;
                   revealed[i][j]=false;
                   flagged[i][j]=false;
+                  doubt[i][j]=false;
                   flag_count[i][j]=0;
             }
         }
-        
         while(no_of_mines<20){
             index1=rand.nextInt(100)%16;
             index2=rand.nextInt(100)%9;
@@ -367,7 +367,6 @@ public class GUI extends JFrame{
                 if(!(i==-1||j==-1)){
                 minecount=0;
                 revealed[i][j]=true;
-                
                 }
                 else{
                     if(inSmiley()==true){
@@ -378,13 +377,14 @@ public class GUI extends JFrame{
                         JTextPane jtp=new JTextPane();
                         Document doc=jtp.getDocument();
                         try {
-                         doc.insertString(doc.getLength(), Msg2+"\nHave a good luck:)",new SimpleAttributeSet());
-                         } catch (BadLocationException ex) {
-                        }
+                            doc.insertString(doc.getLength(), Msg2+"\nHave a good luck:)",new SimpleAttributeSet());
+                        } catch (BadLocationException ex) {
+                      }
                         JScrollPane jsp=new JScrollPane(jtp);
                         jsp.setPreferredSize(new Dimension(150,20));
                         jsp.setBorder(null);                        
                         contx=JOptionPane.showConfirmDialog(null, jsp, Msg1, JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE, icony);
+                        
                         if(contx==0)
                         {
                             inBusy=false;
@@ -444,7 +444,8 @@ public class GUI extends JFrame{
                         JScrollPane jsp=new JScrollPane(jtp);
                         jsp.setPreferredSize(new Dimension(150,20));
                         jsp.setBorder(null);
-                         cont=JOptionPane.showOptionDialog(null, jsp, Msg1, JOptionPane.DEFAULT_OPTION, JOptionPane.PLAIN_MESSAGE, iconx, options, options[0]);
+                        cont=JOptionPane.showOptionDialog(null, jsp, Msg1, JOptionPane.DEFAULT_OPTION, JOptionPane.PLAIN_MESSAGE, iconx, options, options[0]);
+                       
                         if(cont==0)
                         {
                             inBusy=false;
@@ -459,7 +460,6 @@ public class GUI extends JFrame{
                             setr=1;
                             startDate=new Date();check=1;
                             ResetAll();sec=0;secCpy=0;
-                            
                             checkv=false;checkd=false;
                         }
                         }
@@ -483,19 +483,18 @@ public class GUI extends JFrame{
             }
          }
          public void checkVictorystatus(){
-             
              if(defeat==false && victory==false){
              for(int i=0;i<16;i++){
                  for(int j=0;j<9;j++){
                      if(revealed[i][j]==true && mines[i][j]=='-'){
-                         happiness=false;
-                         defeat=true;
-                         checkd=true;
-                         contx=1;
-                         cont=1;
-                         endDate=new Date();
-                         int num=0;
-                         for(int b=0;b<16;b++)  {
+                        happiness=false;
+                        defeat=true;
+                        checkd=true;
+                        contx=1;
+                        cont=1;
+                        endDate=new Date();
+                        int num=0;
+                        for(int b=0;b<16;b++)  {
                             for(int c=0;c<9;c++)  {
                                 if(mines[b][c]=='-' && flagged[b][c]==true)
                                     num++;
@@ -503,117 +502,114 @@ public class GUI extends JFrame{
                         }
                         points=(num%no_of_mines)*10;
                         val=points;
-                     }
+                    }
                 }
-             }
-           }
-             int count=0,set=0;
-             for(int i=0;i<16;i++){
-                 for(int j=0;j<9;j++){
-                     if(flagged[i][j]==true && mines[i][j]=='-'){
+              }
+            }
+            int count=0,set=0;
+            for(int i=0;i<16;i++){
+                for(int j=0;j<9;j++){
+                    if(flagged[i][j]==true && mines[i][j]=='-'){
                        count++;   
-             }
-             }
-             }
-             for(int i=0;i<16;i++){
-                 for(int j=0;j<9;j++){
-                     if(flagged[i][j]==true && mines[i][j]!='-' ){
-                     set=1;
-                     }
-                     }
-                 }
-             if(count==no_of_mines && set==0){
+                    }
+                }
+            }
+            for(int i=0;i<16;i++){
+                for(int j=0;j<9;j++){
+                    if(flagged[i][j]==true && mines[i][j]!='-' ){
+                    set=1;
+                    }
+                }
+            }
+            if(count==no_of_mines && set==0){
                 victory=true;
                 contx=1;
                 cont=1;
                 checkv=true;
                 endDate=new Date();
                 points=no_of_mines*10;
-             }
-         }
-         public void ResetAll(){
-             setr=0;
-             startDate=new Date();
-             Resetter = true;
-             victory=false;
-             defeat=false;
-             checkv=false;checkd=false;
-             happiness=true;
-             no_of_mines=0;
-             Resetter = false;
-             helpCount=0;
-             inBusy=false;
-             points=0;
-             val = 0;
-             startDate=new Date();
-             sec=0;check=0;secCpy=0;
-             for(int i=0;i<16;i++){
-             for(int j=0;j<9;j++){
-                mines[i][j]=0;
-                  revealed[i][j]=false;
-                  flagged[i][j]=false;
-                  flag_count[i][j]=0;
             }
         }
-        Random rand1=new Random();
-        while(no_of_mines<20){
+        public void ResetAll(){
+            setr=0;
+            startDate=new Date();contx=0;cont=0;
+            Resetter = true;
+            victory=false;
+            defeat=false;
+            checkv=false;checkd=false;
+            happiness=true;
+            no_of_mines=0;
+            Resetter = false;
+            helpCount=0;
+            inBusy=false;
+            points=0;
+            val = 0;
+            startDate=new Date();
+            sec=0;check=0;secCpy=0;
+            for(int i=0;i<16;i++){
+                for(int j=0;j<9;j++){
+                   mines[i][j]=0;
+                  revealed[i][j]=false;
+                  flagged[i][j]=false;
+                  doubt[i][j]=false;
+                  flag_count[i][j]=0;
+                }
+            }
+            Random rand1=new Random();
+            while(no_of_mines<20){
             index1=rand1.nextInt(100)%15;
             index2=rand1.nextInt(100)%8;
             if(mines[index1][index2]!='-'){
                 mines[index1][index2]='-';
             no_of_mines++;
             }
-
+          }
+            Neighbours();
         }
-       Neighbours();
-         }
-         public boolean inSmiley()
-         {
-             int diff=(int) Math.sqrt(Math.abs(mx-smileyCenterX)*Math.abs(mx-smileyCenterX)+Math.abs(my-smileyCenterY)*Math.abs(my-smileyCenterY));
-             if(diff<35)
-                 return true;
-             return false;
-         }
-         public boolean inHelp()
-         {
+        public boolean inSmiley()
+        {
+            int diff=(int) Math.sqrt(Math.abs(mx-smileyCenterX)*Math.abs(mx-smileyCenterX)+Math.abs(my-smileyCenterY)*Math.abs(my-smileyCenterY));
+            if(diff<35)
+                return true;
+            return false;
+        }
+        public boolean inHelp()
+        {
             if(mx>=589 && mx<=641 && my>=38 && my<=60)
                 return true;
             return false;
-         }
-         public void setFlag(){
-             
-             int i=inBoxX();
-             int j=inBoxY();
-             if(flagged[i][j]==true) flagged[i][j]=false;
-             else if(flagged[i][j]==false) flagged[i][j]=true;
-             flag_count[i][j]++;
-         }
-         public void setDoubt(){
-             int i=inBoxX();
-             int j=inBoxY();
-             if(doubt[i][j]==true) doubt[i][j]=false;
-             else if(doubt[i][j]==false) doubt[i][j]=true;
-             
-             
-         }
-         public int inBoxX(){
-             for(int i=0;i<16;i++){
-                 for(int j=0;j<9;j++){
+        }
+        public void setFlag(){
+            int i=inBoxX();
+            int j=inBoxY();
+            if(flagged[i][j]==true) flagged[i][j]=false;
+            else if(flagged[i][j]==false) flagged[i][j]=true;
+            flag_count[i][j]++;
+        }
+        public void setDoubt(){
+            int i=inBoxX();
+            int j=inBoxY();
+            if(doubt[i][j]==true) doubt[i][j]=false;
+            else if(doubt[i][j]==false) doubt[i][j]=true;             
+        }
+        public int inBoxX(){
+            for(int i=0;i<16;i++){
+                for(int j=0;j<9;j++){
                     if(mx>=spacing+i*50 && mx<spacing+i*50+50-2*spacing && my>=spacing+j*50+50+26 && my<spacing+j*50+26+50+50-2*spacing){
                     return(i);
                     }
-                 }
-             }
-             return -1;
-         }
-         public int inBoxY(){
-             for(int i=0;i<16;i++){
-                 for(int j=0;j<9;j++){
+                }
+            }
+            return -1;
+        }
+        public int inBoxY(){
+            for(int i=0;i<16;i++){
+                for(int j=0;j<9;j++){
                     if(mx>=spacing+i*50 && mx<spacing+i*50+50-2*spacing && my>=spacing+j*50+50+26 && my<spacing+j*50+26+50+50-2*spacing){
                     return(j);
                     }
-                 }
-             }
-             return -1;
-         }
+                }
+            }
+            return -1;
+        }
 }
